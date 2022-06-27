@@ -16,6 +16,7 @@ export default {
         this.resumes = response.data;
       });
     },
+    updateResume: function () {},
   },
 };
 </script>

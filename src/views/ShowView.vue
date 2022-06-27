@@ -1,18 +1,26 @@
+<script>
+export default {
+  data: function () {
+    return {
+      message: "",
+      resume: {},
+    };
+  },
+  created: function () {
+    axios.get("/resumes/" + this.$route.params.id).then((response) => {
+      console.log("Resume Show");
+      console.log(response.data);
+      this.resume = response.data;
+    });
+  },
+  methods: {},
+};
+</script>
+
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="resume-show">
+    <h1>{{ message }}</h1>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
-export default {
-  name: "HomeView",
-  components: {
-    HelloWorld,
-  },
-};
-</script>
+<style></style>
