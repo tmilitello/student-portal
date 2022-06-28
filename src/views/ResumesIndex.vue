@@ -18,28 +18,40 @@ export default {
       });
     },
     updateStudent: function () {},
-    showModalExperiences: function (experience) {
+    editModalExperiences: function (experience) {
       console.log("Show product...", experience);
       this.currentProduct = experience;
       this.editProductParams = experience;
-      document.querySelector("#experiences-details").showModal();
+      document.querySelector("#experiences-edit").showModal();
     },
-    showModalEducation: function (product) {
+    addModalExperiences: function (experience) {
+      console.log("Show product...", experience);
+      this.currentProduct = experience;
+      this.editProductParams = experience;
+      document.querySelector("#experiences-add").showModal();
+    },
+    editModalEducation: function (product) {
       console.log("Show education...", product);
       this.currentProduct = product;
       this.editProductParams = product;
-      document.querySelector("#education-details").showModal();
+      document.querySelector("#education-edit").showModal();
     },
-    showModalSkills: function (product) {
+    addModalEducation: function (product) {
+      console.log("Show education...", product);
+      this.currentProduct = product;
+      this.editProductParams = product;
+      document.querySelector("#education-add").showModal();
+    },
+    editModalSkills: function (product) {
       console.log("Show product...", product);
       this.currentProduct = product;
       this.editProductParams = product;
-      document.querySelector("#skills-details").showModal();
+      document.querySelector("#skills-edit").showModal();
     },
-    showModalCapstone: function (product) {
+    editModalCapstone: function (product) {
       this.currentProduct = product;
       this.editProductParams = product;
-      document.querySelector("#capstone-details").showModal();
+      document.querySelector("#capstone-edit").showModal();
     },
   },
 };
@@ -58,8 +70,8 @@ export default {
       <h5>Start Date:{{ "student.experience.job_title" }}</h5>
       <h5>End Date: {{ "student.experience.company_name" }}</h5>
       <h5>Details: {{ "student.experience.details" }}</h5>
-      <button v-on:click="showModalExperiences(resume)">Edit</button>
-      <button v-on:click="showModalExperiences(resume)">Add</button>
+      <button v-on:click="editModalExperiences(resume)">Edit</button>
+      <button v-on:click="addModalExperiences(resume)">Add</button>
     </div>
     <div>
       <h2>Education:</h2>
@@ -68,14 +80,14 @@ export default {
       <h5>Start Date: student.educations.degree</h5>
       <h5>End Date: student.educations.university_name</h5>
       <h5>Details: student.educations.details</h5>
-      <button v-on:click="showModalEducation(resume)">Edit</button>
-      <button v-on:click="showModalEducation(resume)">Add</button>
+      <button v-on:click="editModalEducation(resume)">Edit</button>
+      <button v-on:click="addModalEducation(resume)">Add</button>
     </div>
     <div>
       <h2>Skills:</h2>
       <h5>Skills: student.skills.skills</h5>
-      <button v-on:click="showModalSkills(resume)">Edit</button>
-      <button v-on:click="showModalSkills(resume)">Add</button>
+      <button v-on:click="editModalSkills(resume)">Edit</button>
+      <!-- <button v-on:click="addModalSkills(resume)">Add</button> -->
     </div>
     <div>
       <h2>Capstone:</h2>
@@ -84,11 +96,11 @@ export default {
       <h5>URL: student.capstone.url</h5>
       <h5>Screenshot: student.capstone.screenshot</h5>
     </div>
-    <button v-on:click="showModalCapstone(resume)">Update Capstone</button>
+    <button v-on:click="editModalCapstone(resume)">Edit</button>
   </div>
 
   <!-- Experiences -->
-  <dialog id="experiences-details">
+  <dialog id="experiences-edit">
     <form method="dialog">
       <div>
         <h1>Update Experiences</h1>
@@ -102,7 +114,32 @@ export default {
     </form>
   </dialog>
 
-  <dialog id="education-details">
+  <dialog id="experiences-add">
+    <form method="dialog">
+      <div>
+        <h1>Update Experiences</h1>
+        <h5>Company Name:</h5>
+        <h5>Job Title:</h5>
+        <h5>Start Date:</h5>
+        <h5>End Date:</h5>
+        <h5>Details:</h5>
+      </div>
+      <p><button v-on:click="updateStudent(student)">Update</button></p>
+    </form>
+  </dialog>
+
+  <dialog id="education-edit">
+    <form method="dialog">
+      <h1>Update Education</h1>
+      <h5>University: current</h5>
+      <h5>Degree: current</h5>
+      <h5>Start Date: current</h5>
+      <h5>End Date: current</h5>
+      <h5>Details: current</h5>
+      <p><button v-on:click="updateStudent(student)">Update</button></p>
+    </form>
+  </dialog>
+  <dialog id="education-add">
     <form method="dialog">
       <h1>Update Education</h1>
       <h5>University:</h5>
@@ -114,7 +151,7 @@ export default {
     </form>
   </dialog>
 
-  <dialog id="skills-details">
+  <dialog id="skills-edit">
     <form method="dialog">
       <h1>Update Skills</h1>
       <h5>Skills: student.skills</h5>
@@ -123,7 +160,7 @@ export default {
   </dialog>
 
   <!-- Capstone -->
-  <dialog id="capstone-details">
+  <dialog id="capstone-edit">
     <form method="dialog">
       <h1>Update Capstone</h1>
       <h5>Name: v-model for student.capstone.name</h5>
