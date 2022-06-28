@@ -50,36 +50,39 @@ export default {
     <h1>{{ message }}</h1>
     <div>
       <h2>Experience:</h2>
-      <p>
-        Start date:
+      <h5>
+        Company Name:
         <!-- <input type="text" v-model="student.experience.start_date" /> -->
-      </p>
-      <p>End date: {{ "student.experience.end_date" }}</p>
-      <p>Job Title:{{ "student.experience.job_title" }}</p>
-      <p>Company Name: {{ "student.experience.company_name" }}</p>
-      <p>Details: {{ "student.experience.details" }}</p>
-      <button v-on:click="showModalExperiences(resume)">Update</button>
+      </h5>
+      <h5>Job Title: {{ "student.experience.end_date" }}</h5>
+      <h5>Start Date:{{ "student.experience.job_title" }}</h5>
+      <h5>End Date: {{ "student.experience.company_name" }}</h5>
+      <h5>Details: {{ "student.experience.details" }}</h5>
+      <button v-on:click="showModalExperiences(resume)">Edit</button>
+      <button v-on:click="showModalExperiences(resume)">Add</button>
     </div>
     <div>
       <h2>Education:</h2>
-      <p>Start date: student.education.start_date</p>
-      <p>End date: student.education.end_date</p>
-      <p>Graduation: student.education.degree</p>
-      <p>University name: student.education.university_name</p>
-      <p>Details: student.education.details</p>
-      <button v-on:click="showModalEducation(resume)">Update</button>
+      <h5>University: student.educations.start_date</h5>
+      <h5>Degree: student.educations.end_date</h5>
+      <h5>Start Date: student.educations.degree</h5>
+      <h5>End Date: student.educations.university_name</h5>
+      <h5>Details: student.educations.details</h5>
+      <button v-on:click="showModalEducation(resume)">Edit</button>
+      <button v-on:click="showModalEducation(resume)">Add</button>
     </div>
     <div>
       <h2>Skills:</h2>
-      <p>student.skills.skill_name</p>
-      <button v-on:click="showModalSkills(resume)">Update Skills</button>
+      <h5>Skills: student.skills.skills</h5>
+      <button v-on:click="showModalSkills(resume)">Edit</button>
+      <button v-on:click="showModalSkills(resume)">Add</button>
     </div>
     <div>
       <h2>Capstone:</h2>
-      <p>Name: student.capstone.name</p>
-      <p>Description: student.capstone.description</p>
-      <p>URL: student.capstone.url</p>
-      <p>Screenshot: student.capstone.screenshot</p>
+      <h5>Name: student.capstone.name</h5>
+      <h5>Description: student.capstone.description</h5>
+      <h5>URL: student.capstone.url</h5>
+      <h5>Screenshot: student.capstone.screenshot</h5>
     </div>
     <button v-on:click="showModalCapstone(resume)">Update Capstone</button>
   </div>
@@ -89,11 +92,11 @@ export default {
     <form method="dialog">
       <div>
         <h1>Update Experiences</h1>
-        <p>Start date: student.education.start_date</p>
-        <p>End date: student.education.end_date</p>
-        <p>Graduation: student.education.degree</p>
-        <p>University name: student.education.university_name</p>
-        <p>Details: student.education.details</p>
+        <h5>Company Name: student.education.company_name</h5>
+        <h5>Job Title: student.education.end_date</h5>
+        <h5>Start Date: student.education.degree</h5>
+        <h5>End Date: student.education.university_name</h5>
+        <h5>Details: student.education.details</h5>
       </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
@@ -101,19 +104,20 @@ export default {
 
   <dialog id="education-details">
     <form method="dialog">
-      <h2>Education</h2>
-      <h4>University Name:</h4>
-      <h4>Degree:</h4>
-      <h4>Start Date:</h4>
-      <h4>End Date:</h4>
-      <h4>Details:</h4>
+      <h1>Update Education</h1>
+      <h5>University:</h5>
+      <h5>Degree:</h5>
+      <h5>Start Date:</h5>
+      <h5>End Date:</h5>
+      <h5>Details:</h5>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
 
   <dialog id="skills-details">
     <form method="dialog">
-      <p>Skills: student.skills.skill_name</p>
+      <h1>Update Skills</h1>
+      <h5>Skills: student.skills</h5>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
@@ -121,10 +125,11 @@ export default {
   <!-- Capstone -->
   <dialog id="capstone-details">
     <form method="dialog">
-      <p>Name: v-model for student.capstone.name</p>
-      <p>Description: v-model for student.capstone.name</p>
-      <p>URL: v-model for student.capstone.url</p>
-      <p>Screenshot: v-model for student.capstone.screenshot</p>
+      <h1>Update Capstone</h1>
+      <h5>Name: v-model for student.capstone.name</h5>
+      <h5>Description: v-model for student.capstone.name</h5>
+      <h5>URL: v-model for student.capstone.url</h5>
+      <h5>Screenshot: v-model for student.capstone.screenshot</h5>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
