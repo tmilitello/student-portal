@@ -34,13 +34,12 @@ export default {
       console.log("Show product...", product);
       this.currentProduct = product;
       this.editProductParams = product;
-      document.querySelector("#product-details").showModal();
+      document.querySelector("#skills-details").showModal();
     },
     showModalCapstone: function (product) {
-      console.log("Show product...", product);
       this.currentProduct = product;
       this.editProductParams = product;
-      document.querySelector("#product-details").showModal();
+      document.querySelector("#capstone-details").showModal();
     },
   },
 };
@@ -73,7 +72,7 @@ export default {
     <div>
       <h2>Skills:</h2>
       <p>student.skills.skill_name</p>
-      <button v-on:click="showModalSkills(resume)">Update</button>
+      <button v-on:click="showModalSkills(resume)">Update Skills</button>
     </div>
     <div>
       <h2>Capstone:</h2>
@@ -82,7 +81,7 @@ export default {
       <p>URL: student.capstone.url</p>
       <p>Screenshot: student.capstone.screenshot</p>
     </div>
-    <button v-on:click="showModalCapstone(resume)">Update</button>
+    <button v-on:click="showModalCapstone(resume)">Update Capstone</button>
   </div>
 
   <!-- Experiences -->
@@ -112,17 +111,20 @@ export default {
     </form>
   </dialog>
 
-  <dialog id="product-details">
+  <dialog id="skills-details">
     <form method="dialog">
-      <p>Hello</p>
+      <p>Skills: student.skills.skill_name</p>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
 
   <!-- Capstone -->
-  <dialog id="product-details">
+  <dialog id="capstone-details">
     <form method="dialog">
-      <p>Hello</p>
+      <p>Name: v-model for student.capstone.name</p>
+      <p>Description: v-model for student.capstone.name</p>
+      <p>URL: v-model for student.capstone.url</p>
+      <p>Screenshot: v-model for student.capstone.screenshot</p>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
