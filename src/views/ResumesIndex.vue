@@ -5,15 +5,16 @@ export default {
   data: function () {
     return {
       message: "Existing Resumes",
-      resumes: [],
+      student: {},
+      resumeParams: {},
     };
   },
   created: function () {},
   methods: {
-    IndexResumes: function () {
-      axios.get("/resumes").then((response) => {
-        console.log("indexing resumes?");
-        this.resumes = response.data;
+    showStudent: function () {
+      axios.get("/students/1.json").then((response) => {
+        console.log("Showing student resume");
+        this.student = response.data;
       });
     },
     updateResume: function () {},
@@ -24,6 +25,7 @@ export default {
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
+    <!-- Experience, Education, Skills, Capstone -->
   </div>
 </template>
 
