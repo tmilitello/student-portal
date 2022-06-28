@@ -5,7 +5,48 @@ export default {
   data: function () {
     return {
       message: "Existing Resumes",
-      student: {},
+      student: {
+        personal: {
+          first_name: "James",
+          last_name: "Johnston",
+          email: "james@test.com",
+          phone_number: "123-456-7890",
+          short_bio: "This is a test student.",
+          linkedin: "linkedin.com/test",
+          twitter_handle: "twitter.com/test",
+          personal_website: "test.github.io",
+          online_resume: "test.resume.com",
+          github: "github.com/test",
+          photo: "placeholder.jpg",
+        },
+
+        experiences: [
+          { title: "Softwware Engineer", start_date: "2022-02-26", end_date: "", details: "Ran backend automation" },
+          { title: "Junior Softwware Engineer", start_date: "2020-01-26", end_date: "2022-01-20", details: "Dev Ops" },
+        ],
+
+        educations: [
+          {
+            university: "Dartmouth College",
+            degree: "Bachelor of Arts",
+            start_date: "2012-08-15",
+            end_date: "2016-06-14",
+            details: "James got his degree in economics and Japanese history",
+          },
+          {
+            university: "Actualize Coding Bootcamp",
+            degree: "Coding Certificate",
+            start_date: "2022-04-28",
+            end_date: "2022-07-15",
+            details: "James got his certificate in computer science",
+          },
+        ],
+
+        skills: ["Ruby", "Vue.js", "Japanese", "JavaScript"],
+        capstone: [
+          { name: "Basketfy", description: "Thematic Investing Platform", url: "www.basketfy.io", screenshot: "hello" },
+        ],
+      },
       resumeParams: {},
     };
   },
