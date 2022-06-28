@@ -18,11 +18,11 @@ export default {
       });
     },
     updateStudent: function () {},
-    showModalExperiences: function (product) {
-      console.log("Show product...", product);
-      this.currentProduct = product;
-      this.editProductParams = product;
-      document.querySelector("#product-details").showModal();
+    showModalExperiences: function (experience) {
+      console.log("Show product...", experience);
+      this.currentProduct = experience;
+      this.editProductParams = experience;
+      document.querySelector("#experiences-details").showModal();
     },
     showModalEducation: function (product) {
       console.log("Show product...", product);
@@ -86,9 +86,16 @@ export default {
   </div>
 
   <!-- Experiences -->
-  <dialog id="product-details">
+  <dialog id="experiences-details">
     <form method="dialog">
-      <p>Hello</p>
+      <div>
+        <h1>Update Experiences</h1>
+        <p>Start date: student.education.start_date</p>
+        <p>End date: student.education.end_date</p>
+        <p>Graduation: student.education.degree</p>
+        <p>University name: student.education.university_name</p>
+        <p>Details: student.education.details</p>
+      </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
