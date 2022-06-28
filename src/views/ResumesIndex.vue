@@ -18,6 +18,30 @@ export default {
       });
     },
     updateStudent: function () {},
+    showModalExperiences: function (product) {
+      console.log("Show product...", product);
+      this.currentProduct = product;
+      this.editProductParams = product;
+      document.querySelector("#product-details").showModal();
+    },
+    showModalEducation: function (product) {
+      console.log("Show product...", product);
+      this.currentProduct = product;
+      this.editProductParams = product;
+      document.querySelector("#product-details").showModal();
+    },
+    showModalSkills: function (product) {
+      console.log("Show product...", product);
+      this.currentProduct = product;
+      this.editProductParams = product;
+      document.querySelector("#product-details").showModal();
+    },
+    showModalCapstone: function (product) {
+      console.log("Show product...", product);
+      this.currentProduct = product;
+      this.editProductParams = product;
+      document.querySelector("#product-details").showModal();
+    },
   },
 };
 </script>
@@ -35,6 +59,7 @@ export default {
       <p>Job Title:{{ "student.experience.job_title" }}</p>
       <p>Company Name: {{ "student.experience.company_name" }}</p>
       <p>Details: {{ "student.experience.details" }}</p>
+      <button v-on:click="showModalExperiences(resume)">Update</button>
     </div>
     <div>
       <h2>Education:</h2>
@@ -43,10 +68,12 @@ export default {
       <p>Graduation: student.education.degree</p>
       <p>University name: student.education.university_name</p>
       <p>Details: student.education.details</p>
+      <button v-on:click="showModalEducation(resume)">Update</button>
     </div>
     <div>
       <h2>Skills:</h2>
       <p>student.skills.skill_name</p>
+      <button v-on:click="showModalSkills(resume)">Update</button>
     </div>
     <div>
       <h2>Capstone:</h2>
@@ -55,34 +82,38 @@ export default {
       <p>URL: student.capstone.url</p>
       <p>Screenshot: student.capstone.screenshot</p>
     </div>
-    <button v-on:click="updateStudent()">Save</button>
+    <button v-on:click="showModalCapstone(resume)">Update</button>
   </div>
+
+  <!-- Experiences -->
+  <dialog id="product-details">
+    <form method="dialog">
+      <p>Hello</p>
+      <p><button v-on:click="updateStudent(student)">Update</button></p>
+    </form>
+  </dialog>
+
+  <dialog id="product-details">
+    <form method="dialog">
+      <p>Hello</p>
+      <p><button v-on:click="updateStudent(student)">Update</button></p>
+    </form>
+  </dialog>
+
+  <dialog id="product-details">
+    <form method="dialog">
+      <p>Hello</p>
+      <p><button v-on:click="updateStudent(student)">Update</button></p>
+    </form>
+  </dialog>
+
+  <!-- Capstone -->
+  <dialog id="product-details">
+    <form method="dialog">
+      <p>Hello</p>
+      <p><button v-on:click="updateStudent(student)">Update</button></p>
+    </form>
+  </dialog>
 </template>
 
 <style></style>
-
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
