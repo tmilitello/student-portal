@@ -17,7 +17,7 @@ export default {
         this.student = response.data;
       });
     },
-    updateResume: function () {},
+    updateStudent: function () {},
   },
 };
 </script>
@@ -27,19 +27,22 @@ export default {
     <h1>{{ message }}</h1>
     <div>
       <h2>Experience:</h2>
-      <p>{{ "student.experience.start_date" }}</p>
-      <p>{{ "student.experience.end_date" }}</p>
-      <p>{{ "student.experience.job_title" }}</p>
-      <p>{{ "student.experience.company_name" }}</p>
-      <p>{{ "student.experience.details" }}</p>
+      <p>
+        Start date:
+        <!-- <input type="text" v-model="student.experience.start_date" /> -->
+      </p>
+      <p>End date: {{ "student.experience.end_date" }}</p>
+      <p>Job Title:{{ "student.experience.job_title" }}</p>
+      <p>Company Name: {{ "student.experience.company_name" }}</p>
+      <p>Details: {{ "student.experience.details" }}</p>
     </div>
     <div>
       <h2>Education:</h2>
-      <p>student.education.start_date</p>
-      <p>student.education.end_date</p>
-      <p>student.education.degree</p>
-      <p>student.education.university_name</p>
-      <p>student.education.details</p>
+      <p>Start date: student.education.start_date</p>
+      <p>End date: student.education.end_date</p>
+      <p>Graduation: student.education.degree</p>
+      <p>University name: student.education.university_name</p>
+      <p>Details: student.education.details</p>
     </div>
     <div>
       <h2>Skills:</h2>
@@ -47,12 +50,12 @@ export default {
     </div>
     <div>
       <h2>Capstone:</h2>
-      <p>student.capstone.name</p>
-      <p>student.capstone.description</p>
-      <p>student.capstone.url</p>
-      <p>student.capstone.screenshot</p>
+      <p>Name: student.capstone.name</p>
+      <p>Description: student.capstone.description</p>
+      <p>URL: student.capstone.url</p>
+      <p>Screenshot: student.capstone.screenshot</p>
     </div>
-    <!-- Experience, Education, Skills, Capstone -->
+    <button v-on:click="updateStudent()">Save</button>
   </div>
 </template>
 
