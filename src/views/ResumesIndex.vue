@@ -25,10 +25,10 @@ export default {
       document.querySelector("#experiences-details").showModal();
     },
     showModalEducation: function (product) {
-      console.log("Show product...", product);
+      console.log("Show education...", product);
       this.currentProduct = product;
       this.editProductParams = product;
-      document.querySelector("#product-details").showModal();
+      document.querySelector("#education-details").showModal();
     },
     showModalSkills: function (product) {
       console.log("Show product...", product);
@@ -100,9 +100,14 @@ export default {
     </form>
   </dialog>
 
-  <dialog id="product-details">
+  <dialog id="education-details">
     <form method="dialog">
-      <p>Hello</p>
+      <h2>Education</h2>
+      <h4>University Name:</h4>
+      <h4>Degree:</h4>
+      <h4>Start Date:</h4>
+      <h4>End Date:</h4>
+      <h4>Details:</h4>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
