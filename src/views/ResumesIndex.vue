@@ -6,71 +6,22 @@ export default {
     return {
       message: "Resume",
       newStudentParams: {},
-      student: {
-        first_name: "James",
-        last_name: "Johnston",
-        email: "james@test.com",
-        phone_number: "123-456-7890",
-        short_bio: "This is a test student.",
-        linkedin: "linkedin.com/test",
-        twitter_handle: "twitter.com/test",
-        personal_website: "test.github.io",
-        online_resume: "test.resume.com",
-        github: "github.com/test",
-        photo: "placeholder.jpg",
-        experiences: [
-          {
-            company_name: "Apple",
-            job_title: "Softwware Engineer",
-            start_date: "2022-02-26",
-            end_date: "current",
-            details: "Ran backend automation",
-          },
-          {
-            company_name: "Google",
-            job_title: "Junior Softwware Engineer",
-            start_date: "2020-01-26",
-            end_date: "2022-01-20",
-            details: "Dev Ops",
-          },
-        ],
-        educations: [
-          {
-            university_name: "Dartmouth College",
-            degree: "Bachelor of Arts",
-            start_date: "2012-08-15",
-            end_date: "2016-06-14",
-            details: "James got his degree in economics and Japanese history",
-          },
-          {
-            university_name: "Actualize Coding Bootcamp",
-            degree: "Coding Certificate",
-            start_date: "2022-04-28",
-            end_date: "2022-07-15",
-            details: "James got his certificate in computer science",
-          },
-        ],
-        skills: ["Ruby", "Vue.js", "Japanese", "JavaScript"],
-        capstone: {
-          name: "Basketfy",
-          description: "Thematic Investing Platform",
-          url: "www.basketfy.io",
-          screenshot: "hello",
-        },
-      },
+      newSkillParams: {},
+      student: {},
       resumeParams: {},
     };
   },
   created: function () {
+    this.showStudent();
     console.log(this.student);
     console.log(this.student.experiences);
     console.log(this.student.educations);
-    console.log(this.student.capstone.name);
+    console.log(this.student.capstones);
   },
   methods: {
     showStudent: function () {
-      axios.get("/students/1.json").then((response) => {
-        console.log("Showing student resume");
+      axios.get("/students/" + localStorage.user_id + ".json").then((response) => {
+        console.log("Showing student resume", response.data);
         this.student = response.data;
       });
     },
@@ -105,10 +56,23 @@ export default {
       this.editProductParams = product;
       document.querySelector("#skills-edit").showModal();
     },
+    addModalSkills: function (product) {
+      console.log("Show product...", product);
+      this.currentProduct = product;
+      this.editProductParams = product;
+      document.querySelector("#skills-add").showModal();
+    },
     editModalCapstone: function (product) {
       this.currentProduct = product;
       this.editProductParams = product;
       document.querySelector("#capstone-edit").showModal();
+    },
+    createSkill: function () {
+      axios.post("/student_skills.json", this.newSkillParams).then((response) => {
+        console.log(response.data);
+        this.student.skills.push(response.data);
+        this.newSkillParams = {};
+      });
     },
   },
 };
@@ -118,43 +82,43 @@ export default {
   <div class="home">
     <h1>{{ message }}</h1>
     <h2>Experience:</h2>
+    <button v-on:click="editModalExperiences(resume)">Edit</button>
+    <button v-on:click="addModalExperiences(resume)">Add</button>
     <div v-for="experience in student.experiences" v-bind:key="experience.id">
       <h2>{{ experience.company_name }}</h2>
       <h4>Job Title: {{ experience.job_title }}</h4>
       <h5>Start Date: {{ experience.start_date }}</h5>
       <h5>End Date: {{ experience.end_date }}</h5>
       <h5>Details: {{ experience.details }}</h5>
-      <button v-on:click="editModalExperiences(resume)">Edit</button>
-      <button v-on:click="addModalExperiences(resume)">Add</button>
     </div>
     <div>
       <h2>Education:</h2>
+      <button v-on:click="editModalEducation(resume)">Edit</button>
+      <button v-on:click="addModalEducation(resume)">Add</button>
       <div v-for="education in student.educations" v-bind:key="education.id">
         <h2>{{ education.university_name }}</h2>
         <h4>Degree: {{ education.degree }}</h4>
         <h5>Start Date: {{ education.start_date }}</h5>
         <h5>End Date: {{ education.end_date }}</h5>
         <h5>Details: {{ education.details }}</h5>
-        <button v-on:click="editModalEducation(resume)">Edit</button>
-        <button v-on:click="addModalEducation(resume)">Add</button>
       </div>
     </div>
     <div>
       <h2>Skills:</h2>
-      <div v-for="skill in student.skills" v-bind:key="skill.id">
-        <h5>{{ skill }}</h5>
+      <!-- <button v-on:click="editModalSkills(resume)">Edit</button>
+      <button v-on:click="addModalSkills(resume)">Add</button> -->
+      <div v-for="skill in student.student_skills" v-bind:key="skill.id">
+        <h5>{{ skill.skill_name }}</h5>
       </div>
-      <button v-on:click="editModalSkills(resume)">Edit</button>
-      <!-- <button v-on:click="addModalSkills(resume)">Add</button> -->
     </div>
     <div>
       <h2>Capstone:</h2>
-      <h5>Name: {{ student.capstone.name }}</h5>
-      <h5>Description: {{ student.capstone.description }}</h5>
-      <h5>URL: {{ student.capstone.url }}</h5>
-      <h5>Screenshot: {{ student.capstone.screenshot }}</h5>
+      <button v-on:click="editModalCapstone(resume)">Edit</button>
+      <h5>Name: {{ student.capstones.name }}</h5>
+      <h5>Description: {{ student.capstones.description }}</h5>
+      <h5>URL: {{ student.capstones.url }}</h5>
+      <h5>Screenshot: {{ student.capstones.screenshot }}</h5>
     </div>
-    <button v-on:click="editModalCapstone(resume)">Edit</button>
   </div>
 
   <!-- Experiences -->
@@ -283,24 +247,36 @@ export default {
     </form>
   </dialog>
 
+  <dialog id="skills-add">
+    <form method="dialog">
+      <h1>Update Skills</h1>
+      <!-- <div v-for="skill in student.skills" v-bind:key="skill.id"> -->
+      <div>
+        Skill Name:
+        <input type="text" v-model="newSkillParams.skill_name" />
+      </div>
+      <p><button v-on:click="createSkill()">Update</button></p>
+    </form>
+  </dialog>
+
   <!-- Capstone -->
   <dialog id="capstone-edit">
     <form method="dialog">
       <div>
         Name:
-        <input type="text" v-model="student.capstone.name" />
+        <input type="text" v-model="student.capstones.name" />
       </div>
       <div>
         Description:
-        <input type="text" v-model="student.capstone.description" />
+        <input type="text" v-model="student.capstones.description" />
       </div>
       <div>
         URL:
-        <input type="text" v-model="student.capstone.url" />
+        <input type="text" v-model="student.capstones.url" />
       </div>
       <div>
         Screenshot:
-        <input type="text" v-model="student.capstone.screenshot" />
+        <input type="text" v-model="student.capstones.screenshot" />
       </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
