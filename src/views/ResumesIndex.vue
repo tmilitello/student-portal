@@ -4,7 +4,8 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "Existing Resumes",
+      message: "Resume",
+      newStudentParams: {},
       student: {
         first_name: "James",
         last_name: "Johnston",
@@ -19,14 +20,14 @@ export default {
         photo: "placeholder.jpg",
         experiences: [
           {
-            company_name: "Company",
+            company_name: "Apple",
             job_title: "Softwware Engineer",
             start_date: "2022-02-26",
             end_date: "current",
             details: "Ran backend automation",
           },
           {
-            company_name: "Other Company",
+            company_name: "Google",
             job_title: "Junior Softwware Engineer",
             start_date: "2020-01-26",
             end_date: "2022-01-20",
@@ -118,9 +119,9 @@ export default {
     <h1>{{ message }}</h1>
     <h2>Experience:</h2>
     <div v-for="experience in student.experiences" v-bind:key="experience.id">
-      <h5>Company Name: {{ experience.company_name }}</h5>
-      <h5>Job Title: {{ experience.job_title }}</h5>
-      <h5>Start Date:{{ experience.start_date }}</h5>
+      <h2>{{ experience.company_name }}</h2>
+      <h4>Job Title: {{ experience.job_title }}</h4>
+      <h5>Start Date: {{ experience.start_date }}</h5>
       <h5>End Date: {{ experience.end_date }}</h5>
       <h5>Details: {{ experience.details }}</h5>
       <button v-on:click="editModalExperiences(resume)">Edit</button>
@@ -129,8 +130,8 @@ export default {
     <div>
       <h2>Education:</h2>
       <div v-for="education in student.educations" v-bind:key="education.id">
-        <h5>University Name: {{ education.university_name }}</h5>
-        <h5>Degree: {{ education.degree }}</h5>
+        <h2>{{ education.university_name }}</h2>
+        <h4>Degree: {{ education.degree }}</h4>
         <h5>Start Date: {{ education.start_date }}</h5>
         <h5>End Date: {{ education.end_date }}</h5>
         <h5>Details: {{ education.details }}</h5>
@@ -140,7 +141,9 @@ export default {
     </div>
     <div>
       <h2>Skills:</h2>
-      <h5>{{ student.skills }}</h5>
+      <div v-for="skill in student.skills" v-bind:key="skill.id">
+        <h5>{{ skill }}</h5>
+      </div>
       <button v-on:click="editModalSkills(resume)">Edit</button>
       <!-- <button v-on:click="addModalSkills(resume)">Add</button> -->
     </div>
@@ -157,13 +160,28 @@ export default {
   <!-- Experiences -->
   <dialog id="experiences-edit">
     <form method="dialog">
-      <div>
-        <h1>Update Experiences</h1>
-        <h5>Company Name: student.education.company_name</h5>
-        <h5>Job Title: student.education.end_date</h5>
-        <h5>Start Date: student.education.degree</h5>
-        <h5>End Date: student.education.university_name</h5>
-        <h5>Details: student.education.details</h5>
+      <h1>Update Experiences</h1>
+      <div v-for="experience in student.experiences" v-bind:key="experience.id">
+        <div>
+          Company Name:
+          <input type="text" v-model="experience.company_name" />
+        </div>
+        <div>
+          Job Title:
+          <input type="text" v-model="experience.job_title" />
+        </div>
+        <div>
+          Start Date:
+          <input type="text" v-model="experience.start_date" />
+        </div>
+        <div>
+          End Date:
+          <input type="text" v-model="experience.end_date" />
+        </div>
+        <div>
+          Details:
+          <input type="text" v-model="experience.details" />
+        </div>
       </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
@@ -172,12 +190,27 @@ export default {
   <dialog id="experiences-add">
     <form method="dialog">
       <div>
-        <h1>Update Experiences</h1>
-        <h5>Company Name:</h5>
-        <h5>Job Title:</h5>
-        <h5>Start Date:</h5>
-        <h5>End Date:</h5>
-        <h5>Details:</h5>
+        <h1>Add Experiences</h1>
+        <div>
+          Company Name:
+          <input type="text" v-model="newStudentParams.company_name" />
+        </div>
+        <div>
+          Job Title:
+          <input type="text" v-model="newStudentParams.job_title" />
+        </div>
+        <div>
+          Start Date:
+          <input type="text" v-model="newStudentParams.start_date" />
+        </div>
+        <div>
+          End Date:
+          <input type="text" v-model="newStudentParams.end_date" />
+        </div>
+        <div>
+          Details:
+          <input type="text" v-model="newStudentParams.details" />
+        </div>
       </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
@@ -186,22 +219,54 @@ export default {
   <dialog id="education-edit">
     <form method="dialog">
       <h1>Update Education</h1>
-      <h5>University: current</h5>
-      <h5>Degree: current</h5>
-      <h5>Start Date: current</h5>
-      <h5>End Date: current</h5>
-      <h5>Details: current</h5>
+      <div v-for="education in student.educations" v-bind:key="education.id">
+        <div>
+          University:
+          <input type="text" v-model="education.university_name" />
+        </div>
+        <div>
+          Degree:
+          <input type="text" v-model="education.degree" />
+        </div>
+        <div>
+          Start Date:
+          <input type="text" v-model="education.start_date" />
+        </div>
+        <div>
+          End Date:
+          <input type="text" v-model="education.end_date" />
+        </div>
+        <div>
+          Details:
+          <input type="text" v-model="education.details" />
+        </div>
+      </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
   <dialog id="education-add">
     <form method="dialog">
-      <h1>Update Education</h1>
-      <h5>University:</h5>
-      <h5>Degree:</h5>
-      <h5>Start Date:</h5>
-      <h5>End Date:</h5>
-      <h5>Details:</h5>
+      <h1>Add Education</h1>
+      <div>
+        University:
+        <input type="text" v-model="newStudentParams.university_name" />
+      </div>
+      <div>
+        Degree:
+        <input type="text" v-model="newStudentParams.degree" />
+      </div>
+      <div>
+        Start Date:
+        <input type="text" v-model="newStudentParams.start_date" />
+      </div>
+      <div>
+        End Date:
+        <input type="text" v-model="newStudentParams.end_date" />
+      </div>
+      <div>
+        Details:
+        <input type="text" v-model="newStudentParams.details" />
+      </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
@@ -209,7 +274,11 @@ export default {
   <dialog id="skills-edit">
     <form method="dialog">
       <h1>Update Skills</h1>
-      <h5>Skills: student.skills</h5>
+      <!-- <div v-for="skill in student.skills" v-bind:key="skill.id"> -->
+      <div>
+        Skills:
+        <input type="text" v-model="student.skills" />
+      </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
@@ -217,11 +286,22 @@ export default {
   <!-- Capstone -->
   <dialog id="capstone-edit">
     <form method="dialog">
-      <h1>Update Capstone</h1>
-      <h5>Name: v-model for student.capstone.name</h5>
-      <h5>Description: v-model for student.capstone.name</h5>
-      <h5>URL: v-model for student.capstone.url</h5>
-      <h5>Screenshot: v-model for student.capstone.screenshot</h5>
+      <div>
+        Name:
+        <input type="text" v-model="student.capstone.name" />
+      </div>
+      <div>
+        Description:
+        <input type="text" v-model="student.capstone.description" />
+      </div>
+      <div>
+        URL:
+        <input type="text" v-model="student.capstone.url" />
+      </div>
+      <div>
+        Screenshot:
+        <input type="text" v-model="student.capstone.screenshot" />
+      </div>
       <p><button v-on:click="updateStudent(student)">Update</button></p>
     </form>
   </dialog>
