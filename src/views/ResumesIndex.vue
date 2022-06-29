@@ -25,6 +25,7 @@ export default {
         this.student = response.data;
       });
     },
+    updateStudent: function () {},
     editModalExperiences: function (experience) {
       console.log("Show product...", experience);
       this.currentProduct = experience;
@@ -112,13 +113,11 @@ export default {
     </div>
     <div>
       <h2>Capstone:</h2>
-      <div v-for="capstone in student.capstones" v-bind:key="capstone.id">
-        <button v-on:click="editModalCapstone(resume)">Edit</button>
-        <h5>Name: {{ capstone.name }}</h5>
-        <h5>Description: {{ capstone.description }}</h5>
-        <h5>URL: {{ capstone.url }}</h5>
-        <h5>Screenshot: {{ capstone.screenshot }}</h5>
-      </div>
+      <button v-on:click="editModalCapstone(resume)">Edit</button>
+      <h5>Name: {{ student.capstones.name }}</h5>
+      <h5>Description: {{ student.capstones.description }}</h5>
+      <h5>URL: {{ student.capstones.url }}</h5>
+      <h5>Screenshot: {{ student.capstones.screenshot }}</h5>
     </div>
   </div>
 
@@ -260,6 +259,7 @@ export default {
     </form>
   </dialog>
 
+  <!-- Capstone -->
   <dialog id="capstone-edit">
     <form method="dialog">
       <div>
