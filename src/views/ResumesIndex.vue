@@ -10,6 +10,7 @@ export default {
       student: {},
       resumeParams: {},
       newEducationParams: {},
+      newExperienceParams: {},
     };
   },
   created: function () {
@@ -81,7 +82,15 @@ export default {
         console.log(this.newEducationParams.student_id);
         console.log(response.data);
         this.student.educations.push(response.data);
-        this.newSkillParams = {};
+        this.newEducationParams = {};
+      });
+    },
+    createExperience: function () {
+      this.newExperienceParams.student_id = localStorage.user_id;
+      axios.post("/experiences.json", this.newExperienceParams).then((response) => {
+        console.log(response.data);
+        this.student.experiences.push(response.data);
+        this.newExperienceParams = {};
       });
     },
   },
@@ -167,26 +176,26 @@ export default {
         <h1>Add Experiences</h1>
         <div>
           Company Name:
-          <input type="text" v-model="newStudentParams.company_name" />
+          <input type="text" v-model="newExperienceParams.company_name" />
         </div>
         <div>
           Job Title:
-          <input type="text" v-model="newStudentParams.job_title" />
+          <input type="text" v-model="newExperienceParams.job_title" />
         </div>
         <div>
           Start Date:
-          <input type="text" v-model="newStudentParams.start_date" />
+          <input type="text" v-model="newExperienceParams.start_date" />
         </div>
         <div>
           End Date:
-          <input type="text" v-model="newStudentParams.end_date" />
+          <input type="text" v-model="newExperienceParams.end_date" />
         </div>
         <div>
           Details:
-          <input type="text" v-model="newStudentParams.details" />
+          <input type="text" v-model="newExperienceParams.details" />
         </div>
       </div>
-      <p><button v-on:click="updateStudent(student)">Update</button></p>
+      <p><button v-on:click="createExperience()">Update</button></p>
     </form>
   </dialog>
 
