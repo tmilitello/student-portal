@@ -9,6 +9,7 @@ export default {
       newSkillParams: {},
       student: {},
       resumeParams: {},
+      newEducationParams: {},
     };
   },
   created: function () {
@@ -71,6 +72,15 @@ export default {
       axios.post("/student_skills.json", this.newSkillParams).then((response) => {
         console.log(response.data);
         this.student.skills.push(response.data);
+        this.newSkillParams = {};
+      });
+    },
+    createEducation: function () {
+      this.newEducationParams.student_id = localStorage.user_id;
+      axios.post("/educations.json", this.newEducationParams).then((response) => {
+        console.log(this.newEducationParams.student_id);
+        console.log(response.data);
+        this.student.educations.push(response.data);
         this.newSkillParams = {};
       });
     },
@@ -213,25 +223,25 @@ export default {
       <h1>Add Education</h1>
       <div>
         University:
-        <input type="text" v-model="newStudentParams.university_name" />
+        <input type="text" v-model="newEducationParams.university_name" />
       </div>
       <div>
         Degree:
-        <input type="text" v-model="newStudentParams.degree" />
+        <input type="text" v-model="newEducationParams.degree" />
       </div>
       <div>
         Start Date:
-        <input type="text" v-model="newStudentParams.start_date" />
+        <input type="text" v-model="newEducationParams.start_date" />
       </div>
       <div>
         End Date:
-        <input type="text" v-model="newStudentParams.end_date" />
+        <input type="text" v-model="newEducationParams.end_date" />
       </div>
       <div>
         Details:
-        <input type="text" v-model="newStudentParams.details" />
+        <input type="text" v-model="newEducationParams.details" />
       </div>
-      <p><button v-on:click="updateStudent(student)">Update</button></p>
+      <p><button v-on:click="createEducation()">Update</button></p>
     </form>
   </dialog>
 
